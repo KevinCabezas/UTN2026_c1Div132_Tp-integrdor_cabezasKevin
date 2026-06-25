@@ -42,6 +42,18 @@ const selectProductById = (id) => {
   return connection.query(sql, [id]);
 }
 
+
+const consultStock = (id) => {
+
+  const sql = `
+    SELECT stock 
+    FROM products
+    WHERE id = ?
+  `;
+
+  return connection.query(sql, [id]);
+}
+
 const insertNewProduct = (name, brand, price, stock, line_id, image_url) => {
   const sql = "INSERT INTO products (name, brand, price, stock, line_id, image_url) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -69,5 +81,6 @@ export default {
   selectProductById,
   insertNewProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  consultStock,
 }
