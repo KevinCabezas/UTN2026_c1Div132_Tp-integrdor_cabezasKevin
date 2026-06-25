@@ -19,22 +19,20 @@ CREATE TABLE products (
 );
 
 
--- 4. Tabla de Ventas (Guarda los datos globales de la compra)
 CREATE TABLE sales (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(100) NOT NULL, -- Nombre del usuario temporal
+    customer_name VARCHAR(100) NOT NULL, 
     total_price DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 5. Tabla Intermedia / Pivot (Representa la relación Muchos a Muchos)
--- Conecta productos con ventas y maneja las cantidades del carrito.
+
 CREATE TABLE product_sale (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sale_id INT NOT NULL,
     product_id INT NOT NULL,
-    quantity INT NOT NULL DEFAULT 1,     -- Parámetro cantidad del requerimiento
-    price_unit DECIMAL(10, 2) NOT NULL,  -- Precio del producto congelado al momento de la compra
+    quantity INT NOT NULL DEFAULT 1,    
+    price_unit DECIMAL(10, 2) NOT NULL, 
     FOREIGN KEY (sale_id) REFERENCES sales(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
